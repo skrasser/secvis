@@ -6,7 +6,7 @@ ifeq ($(UNAME), Darwin)
 	LIBS = -lpcap -lpthread -lglut -lGL -lGLU -lXmu -lXi -lXext -lX11 -lm -lqt-mt
 	LIBPATH = -L/opt/X11/lib -L/opt/local/lib/qt3/lib
 	INCPATH = -I/opt/local/include/qt3 -I/opt/X11/include
-	CXXFLAGS = $(INCPATH) -Wall
+	CXXFLAGS = $(INCPATH) -Wall -DHAVE_PCAP_FINDALLDEVS
 else
 	LIBS = -lpcap -lpthread -lglut -lGL -lGLU -lXmu -lXi -lXext -lX11 -lm -lqt
 	LIBPATH = -L/usr/X11R6/lib/ -L/usr/qt/3/lib/

@@ -864,7 +864,7 @@ int OpenPcap()
         }
         if(strcasecmp(pv.interface, "any") != 0) {
             for(tempdev = pv.interface_list; tempdev != NULL; tempdev = tempdev->next) {
-                if(strcasecmp(tempdev->name, pv.interface) == 0) {
+	    	if(strcasecmp(tempdev->name, pv.interface) == 0) {
                     break;
                 }
             }
