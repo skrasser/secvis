@@ -21,5 +21,4 @@ secvis: $(OBJ)
 	g++ -g -o secvis $(OBJ) $(LIBPATH) $(LIBS) $(INCPATH)
 
 clean:
-	rm secvis *.o capture/*.o
-
+	rm -f secvis *.o capture/*.o

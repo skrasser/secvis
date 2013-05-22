@@ -22,41 +22,33 @@
 
 //#define BENCHMARK
 
-pthread_t thread_gfx;
+static pthread_t thread_gfx;
+static listnode *current_r, *prev_r, *first_r;
+static struct pkt_info *pinfo_r;
+static short rot;
+static char buffer[BUFSIZE];
+static int win_width = WIN_WIDTH, win_height = WIN_HEIGHT;
+static int zoom_y;
+static GLfloat ortho_top = 1.0, ortho_bottom = 0.0, persp_tx = 0.0, persp_ty = -0.35, persp_fov = 40.0;
+static struct timeval now;
+static int64_t timediff;
+static int64_t max_age = 20000000, max_age_sec;
+static float age_ratio;
+static bool middle_button = false, left_button = false, right_button = false;
+static int drag_x, drag_y;
+static struct pkt_info *data;
+static bool find_closest = false;
+static struct in_addr ipaddr;
+static unsigned short port = 0;
+static unsigned char mode = MODE_ORTHO;
+static bool display_throbber = true, display_grid = false;
 
-listnode *current_r, *prev_r, *first_r;
-struct pkt_info *pinfo_r;
-short rot;
-extern LinkedList pkt_info_list;
-char buffer[BUFSIZE];
-int win_width = WIN_WIDTH, win_height = WIN_HEIGHT;
-int zoom_y;
-GLfloat ortho_top = 1.0, ortho_bottom = 0.0, persp_tx = 0.0, persp_ty = -0.35, persp_fov = 40.0;
-struct timeval now;
-int64_t timediff;
-int64_t max_age = 20000000, max_age_sec;
-float age_ratio;
-extern pthread_mutex_t mutex_pkt_info_list;
-bool middle_button = false, left_button = false, right_button = false;
-int drag_x, drag_y;
-struct pkt_info *data;
-bool find_closest = false;
-struct in_addr ipaddr;
-unsigned short port = 0;
-unsigned char mode = MODE_ORTHO;
-bool display_throbber = true, display_grid = false;
-extern struct timeval playback_time, ts_lastpkt;
-extern bool playback_mode;
-extern double playback_speed;
-extern unsigned long buffer_count;
-extern listnode **skiptable;
-
-GLint viewport[4];
-GLdouble modelview[16], projection[16];
+static GLint viewport[4];
+static GLdouble modelview[16], projection[16];
 
 #ifdef BENCHMARK
-struct timeval benchmark_now, benchmark_start;
-unsigned int framecount = 0;
+static struct timeval benchmark_now, benchmark_start;
+static unsigned int framecount = 0;
 #endif
 
 void *begin_gfx(void*) {

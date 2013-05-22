@@ -9,6 +9,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <time.h>
+#include "list.h"
 
 #define PKT_TCP 0
 #define PKT_UDP 1
@@ -25,6 +26,16 @@ struct pkt_info {
 	char *payload;
 	unsigned int payload_len;
 };
+
+extern LinkedList pkt_info_list;
+extern pthread_mutex_t mutex_pkt_info_list;
+extern struct timeval playback_time, ts_lastpkt;
+extern double playback_speed;
+extern unsigned long buffer_count;
+extern listnode **skiptable;
+
+// Defined in neti.cpp
+extern bool playback_mode; // true if pcap file is played back
 
 void init_capture();
 void log_packet_info(u_int32_t, u_int32_t, char, u_int16_t, u_int16_t, u_short, struct timeval, char*, unsigned int);

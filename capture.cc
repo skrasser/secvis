@@ -16,18 +16,19 @@
 #include "capture/decode.h"
 #include "list.h"
 
+// Globals
 LinkedList pkt_info_list;	// liked list that holds all packet information
 pthread_mutex_t mutex_pkt_info_list = PTHREAD_MUTEX_INITIALIZER;
 struct timeval playback_time;		// the time in playback mode (real time uses system time)
-extern bool playback_mode;	// true if pcap file is played back
-struct itimerval timer_value;	// timer for virtual wall time in playback mode
-int playback_progress;		// time in msec the playback time is updated
-double playback_speed;		// the speed of the playback, 1.0 for real-time playback
-struct timeval ts_firstpkt;	// timestamp of first packet
 struct timeval ts_lastpkt;
-bool have_firstpkt = false;	// indicates whether the first packet has been processed in playback mode
+double playback_speed;		// the speed of the playback, 1.0 for real-time playback
 unsigned long buffer_count = 0;
 listnode **skiptable = 0;
+
+static struct itimerval timer_value;	// timer for virtual wall time in playback mode
+static int playback_progress;		// time in msec the playback time is updated
+static struct timeval ts_firstpkt;	// timestamp of first packet
+static bool have_firstpkt = false;	// indicates whether the first packet has been processed in playback mode
 
 static void sig_alarm_handler(int signal) {
 	playback_time.tv_usec += (long)(playback_speed * playback_progress * 1000);
