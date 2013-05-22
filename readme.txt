@@ -1,9 +1,10 @@
 Secvis is the tool used for the research described in the following paper:
 http://juliangrizzard.com/pubs/2005_krasser_iaw.pdf
 
-The code was initially released with Greg's Black Hat USA 2005 presentation.
-Note that this is a rough prototype. The code is not tidy, secure, or
-efficient.
+The code was initially released with Greg Conti's Black Hat USA 2005
+presentation. Note that this is a rough prototype. The code is not tidy,
+secure, or efficient. It was meant to support the outlined research and not
+to produce a standalone tool.
 
 ******* Greg's README from the 2005 Black Hat presentation *******
 
@@ -69,5 +70,3 @@ This here should always do the job: sudo killall -9 secvis.
 The right button should mark the nearest packet, the middle one is for 
 panning. If you don't have a middle button, you can use the Emulate 3 
 Button Mouse option in X11. 
-
-
