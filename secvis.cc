@@ -1,14 +1,10 @@
 // $Id: secvis.cc,v 1.7 2005/02/23 21:49:12 sven Exp $
 
 #include <iostream>
-//#include <stdio.h>
 #include "capture/neti.h"
 #include "gfx.h"
 #include "capture.h"
 #include "gui.h"
-
-int dummy;
-extern long max_age;
 
 void init() {
 }
