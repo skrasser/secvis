@@ -93,6 +93,7 @@ void *begin_gfx(void*) {
 		
 	make_font();
 	glutMainLoop();
+	return 0;
 }
 
 void draw_marker(GLfloat x, GLfloat y) {
@@ -343,9 +344,9 @@ void display_func() {
 	glPushMatrix();
 	if(playback_mode) {
 		float percentage = (100.0 * (float)now.tv_sec / (float)ts_lastpkt.tv_sec);
-		snprintf(buffer, BUFSIZE, "Time range %lld sec, displaying %d packets, %d buffered, %d itc, at %d.%08d secs (%.0f%%), x%.1f", max_age_sec, count_displ, buffer_count, count, now.tv_sec, now.tv_usec, percentage, playback_speed);
+		snprintf(buffer, BUFSIZE, "Time range %lld sec, displaying %ld packets, %ld buffered, %ld itc, at %ld.%08d secs (%.0f%%), x%.1f", max_age_sec, count_displ, buffer_count, count, now.tv_sec, now.tv_usec, percentage, playback_speed);
 	} else
-		snprintf(buffer, BUFSIZE, "Time range %lld sec, displaying %d packets", max_age_sec, count);
+		snprintf(buffer, BUFSIZE, "Time range %lld sec, displaying %ld packets", max_age_sec, count);
 	draw_string(0.0, 0.0, buffer);
 	
 	//     close port/IP

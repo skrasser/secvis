@@ -5,7 +5,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include <malloc.h>
+#include <stdlib.h>
 #include <iostream>
 #include <pthread.h>
 #include <signal.h>
@@ -77,7 +77,6 @@ void init_capture() {
 
 void log_packet_info(u_int32_t ip_src, u_int32_t ip_dst, char proto, u_int16_t sport, u_int16_t dport, 
 	u_short len, struct timeval timestamp, char *payload, unsigned int payload_len) {
-	struct in_addr s, d;
 	struct pkt_info *pinfo;
 	if ((pinfo = (struct pkt_info*)malloc(sizeof(struct pkt_info))) == 0) {
 		std::cout << "Could not store packet information" << std::endl;

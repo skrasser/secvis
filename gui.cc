@@ -136,8 +136,6 @@ QString bytes_to_hexascii(char *text, int size)
 
 
 void textbox_pkt_info(struct pkt_info *pinfo) {
-	char sip_buffer[BUFSIZE], dip_buffer[BUFSIZE];
-	char *proto;
 	struct in_addr ipaddr;
 	QString string;
 	

@@ -85,8 +85,8 @@ int DisplayBanner()
 {
  /*   printf("\n-*> NETI@home <*-\nVersion 2.0\n"
             "By Charles Robert Simpson, Jr. (neti@ece.gatech.edu, www.neti.gatech.edu)\n"
-            "Portions of Code Lovingly Ripped from Snort and Ethereal\n\n");
-    return 0; */
+            "Portions of Code Lovingly Ripped from Snort and Ethereal\n\n"); */
+    return 0;
 }
 
 
@@ -141,7 +141,7 @@ int strip(char *data)
  *
  */
 
-void PrintError(char *str)
+void PrintError(const char *str)
 {
     if(pv.daemon_flag)
         syslog(LOG_CONS | LOG_DAEMON | LOG_ERR, "%s:%m", str);
@@ -245,7 +245,7 @@ void FatalError(const char *format,...)
     exit(1);
 }
 
-void FatalPrintError(char *msg)
+void FatalPrintError(const char *msg)
 {
     PrintError(msg);
     exit(1);
@@ -253,7 +253,7 @@ void FatalPrintError(char *msg)
 
 /****************************************************************************
  *
- * Function: CreatePidFile(char *)
+ * Function: CreatePidFile(const char *)
  *
  * Purpose:  Creates a PID file
  *
@@ -262,7 +262,7 @@ void FatalPrintError(char *msg)
  * Returns: void function
  *
  ****************************************************************************/
-void CreatePidFile(char *intf)
+void CreatePidFile(const char *intf)
 {
     FILE *pid_file;
     struct stat pt;
@@ -427,14 +427,14 @@ void GoDaemon(void)
  * @param directory directory to chroot to
  * @param logdir ptr to pv.log_dir
  */
-void SetChroot(char *directory, char **logstore)
+void SetChroot(const char *directory, const char **logstore)
 {
 #ifdef WIN32
     FatalError("SetChroot() should not be called under Win32!\n");
 #else
     char *absdir;
     int abslen;
-    char *logdir;
+    const char *logdir;
     
     if(!directory || !logstore)
     {
@@ -547,7 +547,7 @@ char *CurrentWorkingDir(void)
 /**
  * Given a directory name, return a ptr to a static 
  */
-char *GetAbsolutePath(char *dir)
+char *GetAbsolutePath(const char *dir)
 {
     char *savedir, *dirp;
     static char buf[PATH_MAX_UTIL + 1];

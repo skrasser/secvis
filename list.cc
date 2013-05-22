@@ -1,5 +1,5 @@
 // $Id: list.cc,v 1.3 2005/01/19 22:27:45 sven Exp $
-using namespace std;
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
@@ -41,7 +41,7 @@ void *LinkedList::del_next(listnode *current) {
 }
 void LinkedList::append(void *data) {
 	listnode *new_node;
-	if(new_node = (listnode*)malloc(sizeof(listnode))) {
+	if((new_node = (listnode*)malloc(sizeof(listnode)))) {
 		new_node->data = data;
 		new_node->next = 0;
 		if(last) {
@@ -51,13 +51,13 @@ void LinkedList::append(void *data) {
 			first = last = new_node;
 		}
 	} else {
-		cout << "Could not store data in linked list" << endl;
+		std::cout << "Could not store data in linked list" << std::endl;
 	}
 }
 
 void LinkedList::prepend(void *data) {
 	listnode *new_node;
-	if(new_node = (listnode*)malloc(sizeof(listnode))) {
+	if((new_node = (listnode*)malloc(sizeof(listnode)))) {
 		new_node->data = data;
 		new_node->next = first;
 		first = new_node;
@@ -65,49 +65,6 @@ void LinkedList::prepend(void *data) {
 			last = first;
 		}
 	} else {
-		cout << "Could not store data in linked list" << endl;
+		std::cout << "Could not store data in linked list" << std::endl;
 	}
 }
-
-// some old code from the original list.c
-
-/*
-listnode *list_next(listnode *current) {
-	return current->next;
-}
-
-void list_insert(listnode *current, void *data) {
-	listnode *new_node;
-	if(new_node = (listnode*)malloc(sizeof(listnode))) {
-		new_node->data=data;
-		new_node->next=current->next;
-		current->next=new_node;
-	} else {
-		fprintf(stderr,"List: Could not insert.\n");
-	}
-}
-
-listnode *list_insert_beginning(listnode *first, void *data) {
-	listnode *new_node;
-	if(new_node = (listnode*)malloc(sizeof(listnode))) {
-		new_node->data=data;
-		new_node->next=first;
-		return new_node;
-	} else {
-		fprintf(stderr,"List: Could not insert.\n");
-		return first;
-	}
-}
-
-void *list_delete(listnode *current) {
-	listnode *delnode;
-	void *data;
-	if(current->next) {
-		delnode = current->next;
-		current->next = current->next->next;
-		data=delnode->data;
-		free(delnode);
-		return data;
-	}
-}
-*/

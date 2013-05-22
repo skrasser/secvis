@@ -341,7 +341,7 @@ int ParseCmdLine(int argc, char *argv[])
     int ch;                         /* storage var for getopt info */
     char errorbuf[PCAP_ERRBUF_SIZE];
     int adaplen;
-    char *valid_options;
+    const char *valid_options;
     if_info_t *tempdev = NULL;
     int err;
     int devcount;
@@ -449,10 +449,8 @@ int ParseCmdLine(int argc, char *argv[])
                    the entire name of the interface and it is compiled
                    regardless of which OS you have */
                 {
-                    pv.interface = (char *)malloc(strlen(optarg) + 1);
-                    /* XXX OOM check */
-                    strlcpy(pv.interface, optarg, strlen(optarg)+1);
-                    DEBUG_WRAP(DebugMessage(DEBUG_INIT,
+		    pv.interface = optarg;
+		    DEBUG_WRAP(DebugMessage(DEBUG_INIT,
                         "Interface = %s\n",
                         PRINT_INTERFACE(pv.interface)););
                 }
@@ -792,7 +790,7 @@ void *InterfaceThread(void *arg)
 
     TIMERSUB(&endtime, &starttime, &difftime);
 
-    printf("Run time for packet processing was %lu.%lu seconds\n", 
+    printf("Run time for packet processing was %lu.%u seconds\n", 
             difftime.tv_sec, difftime.tv_usec);
 
     CleanExit(0);

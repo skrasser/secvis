@@ -106,10 +106,10 @@ typedef struct _progvars
     int pkt_snaplen;
     u_long netmask;
     char pid_filename[STD_BUF];
-    char *log_dir;
+    const char *log_dir;
     char readfile[STD_BUF];
     char pid_path[STD_BUF];
-    char *interface;
+    const char *interface;
     if_info_t *interface_list;
     char *pcap_cmd;
     char *chroot_dir;
