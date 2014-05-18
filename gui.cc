@@ -1,19 +1,14 @@
 #include <qapplication.h> 
-#include <qtextview.h>
 #include <qlabel.h>
 #include <qfont.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <iostream>
-
 #include "secvis.h"
 #include "capture.h"
 
-
-
 QApplication *a;
-//QTextView *textBox;
 QLabel *textBox;
 
 QString to_hex(unsigned char c)
@@ -133,8 +128,6 @@ QString bytes_to_hexascii(char *text, int size)
 	return output;
 }
 
-
-
 void textbox_pkt_info(struct pkt_info *pinfo) {
 	struct in_addr ipaddr;
 	QString string;
@@ -176,16 +169,15 @@ void gui_init( int argc, char **argv )
 { 
 	a = new QApplication( argc, argv );
 	
-	textBox = new QLabel(0);//new QTextView(0, 0);
+	textBox = new QLabel(0);
 	
 	textBox->setFont(QFont("Courier", 12));
 	textBox->setTextFormat(Qt::PlainText);
 	textBox->resize(600, 140);
 	textBox->setAlignment(Qt::AlignTop | Qt::AlignLeft);
-	textBox->setCaption("SecVis Packet Information Output Window");
-	textBox->setText("SecVis Packet Information Output Window");
+	textBox->setWindowTitle("SecVis Packet Information Output Window");
+	textBox->setText("Select a packet by right-clicking into the visualization window");
 	
-	a->setMainWidget(textBox); 
 	textBox->show();
 }
 
